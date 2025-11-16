@@ -17,7 +17,7 @@ export default function Home() {
         <CallToAction />
         <DashboardSnippet />
       </div>
-      <PricingSection />
+      {/* <PricingSection /> */}
     </main>
   )
 }
