@@ -414,6 +414,17 @@ export const useCourseContent = (
   }, [onJsonDescription, onDescription])
 
   const onEditTextEditor = (event: Event) => {
+    const target = event.target as HTMLElement
+    // Ignore clicks on editor command menu items
+    if (
+      target.closest('[cmdk-item]') ||
+      target.closest('[cmdk-list]') ||
+      target.closest('[cmdk-command]') ||
+      target.closest('.novel-editor-command') ||
+      target.closest('.tippy-box')
+    ) {
+      return
+    }
     if (editor.current) {
       !editor.current.contains(event.target as Node | null)
         ? setOnEditDescription(false)

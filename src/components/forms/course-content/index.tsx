@@ -34,7 +34,50 @@ const CourseContentForm = ({
     data?.section?.htmlContent || null,
   )
   return groupid === userid ? (
-    <form onSubmit={onUpdateContent} className="p-5 flex flex-col" ref={editor}>
+    <form 
+      onSubmit={(e) => {
+        // Prevent form submission when clicking on editor command items
+        const target = e.nativeEvent.target as HTMLElement
+        if (
+          target.closest('[cmdk-item]') ||
+          target.closest('[cmdk-list]') ||
+          target.closest('[cmdk-command]') ||
+          target.closest('.novel-editor-command')
+        ) {
+          e.preventDefault()
+          return
+        }
+        onUpdateContent(e)
+      }} 
+      className="p-5 flex flex-col" 
+      ref={editor}
+      onClick={(e) => {
+        // Prevent form submission when clicking on editor command items
+        const target = e.target as HTMLElement
+        if (
+          target.closest('[cmdk-item]') ||
+          target.closest('[cmdk-list]') ||
+          target.closest('[cmdk-command]') ||
+          target.closest('.novel-editor-command')
+        ) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }}
+      onMouseDown={(e) => {
+        // Prevent form submission when clicking on editor command items
+        const target = e.target as HTMLElement
+        if (
+          target.closest('[cmdk-item]') ||
+          target.closest('[cmdk-list]') ||
+          target.closest('[cmdk-command]') ||
+          target.closest('.novel-editor-command')
+        ) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }}
+    >
       <BlockTextEditor
         onEdit={onEditDescription}
         max={10000}

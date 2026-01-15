@@ -119,7 +119,9 @@ const BlockTextEditor = ({
                 {suggestionItems.map((item: any) => (
                   <EditorCommandItem
                     value={item.title}
-                    onCommand={(val) => item.command(val)}
+                    onCommand={(val) => {
+                      item.command(val)
+                    }}
                     className={`flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-accent aria-selected:bg-accent `}
                     key={item.title}
                   >
