@@ -313,7 +313,7 @@ export const onGetSectionProgressInfo = async (sectionid: string) => {
         },
       },
     })
-    console.log("section progress", section)
+    // console.log("section progress", section)
     if (section) {
       return {
         status: 200,

@@ -372,7 +372,7 @@ export const onUpDateGroupSettings = async (
           icon: content,
         },
       })
-      console.log("uploaded image")
+      // console.log("uploaded image")
     }
     if (type === "DESCRIPTION") {
       await client.group.update({

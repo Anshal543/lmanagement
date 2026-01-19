@@ -39,6 +39,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
     sectionInputRef,
     sectionUpdatePending,
     updateVariables,
+    moduleId,
   } = useCourseModule(courseId, groupid)
   return (
     <div className="flex flex-col">
@@ -64,8 +65,11 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
             }}
             id={module.id}
             key={module.id}
-            title={isPending ? variables?.content! : module.title}
-            // title={isPending ? variables?.content! : module.title}
+            title={
+              isPending && moduleId === module.id
+                ? variables?.content!
+                : module.title
+            }
           >
             <AccordionContent className="flex flex-col gap-y-2 px-3">
               {module.section.length ? (
@@ -112,26 +116,28 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
               )}
               {groupOwner?.groupOwner && (
                 <>
-                  {pendingSection && sectionVariables && (
-                    <Link
-                      onClick={() =>
-                        setActiveSection(sectionVariables.sectionid)
-                      }
-                      className="flex gap-x-3 items-center"
-                      href={`/group/${groupid}/courses/${courseId}/${sectionVariables.sectionid}`}
-                    >
-                      <EmptyCircle />
-                      <IconRenderer
-                        icon={"doc"}
-                        mode={
-                          pathname.split("/").pop() === activeSection
-                            ? "LIGHT"
-                            : "DARK"
+                  {pendingSection &&
+                    sectionVariables &&
+                    sectionVariables.moduleid === module.id && (
+                      <Link
+                        onClick={() =>
+                          setActiveSection(sectionVariables.sectionid)
                         }
-                      />
-                      New Section
-                    </Link>
-                  )}
+                        className="flex gap-x-3 items-center"
+                        href={`/group/${groupid}/courses/${courseId}/${sectionVariables.sectionid}`}
+                      >
+                        <EmptyCircle />
+                        <IconRenderer
+                          icon={"doc"}
+                          mode={
+                            pathname.split("/").pop() === activeSection
+                              ? "LIGHT"
+                              : "DARK"
+                          }
+                        />
+                        New Section
+                      </Link>
+                    )}
                   <Button
                     onClick={() =>
                       mutateSection({

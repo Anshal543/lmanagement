@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
           return_url: `http://localhost:3000/group/${groupid}/settings/integrations`,
           type: "account_onboarding",
         })
-        console.log(accountLink)
+        // console.log(accountLink)
         return NextResponse.json({
           url: accountLink.url,
         })

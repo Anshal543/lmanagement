@@ -195,6 +195,7 @@ export const useCourseModule = (courseId: string, groupid: string) => {
       })
     },
     onSettled: async () => {
+      setModuleId(undefined)
       return await client.invalidateQueries({
         queryKey: ["course-modules"],
       })
@@ -330,6 +331,7 @@ export const useCourseModule = (courseId: string, groupid: string) => {
     editSection,
     sectionUpdatePending,
     updateVariables,
+    moduleId,
   }
 }
 

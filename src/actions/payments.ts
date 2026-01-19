@@ -60,7 +60,7 @@ export const onGetActiveSubscription = async (groupId: string) => {
 }
 
 export const onGetGroupSubscriptionPaymentIntent = async (groupid: string) => {
-  console.log("running")
+  // console.log("running")
   try {
     const price = await client.subscription.findFirst({
       where: {
@@ -82,7 +82,7 @@ export const onGetGroupSubscriptionPaymentIntent = async (groupid: string) => {
     })
 
     if (price && price.price) {
-      console.log("🟣", price.Group?.User.stripeId)
+      // console.log("🟣", price.Group?.User.stripeId)
       const paymentIntent = await stripe.paymentIntents.create({
         currency: "usd",
         amount: price.price * 100,
